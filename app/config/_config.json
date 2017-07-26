@@ -1,0 +1,26 @@
+{
+  "test": {
+    "database": "mongodb://localhost:27017/node-test",
+    "seed": true,
+    "token": "7C91A11D-D48D-4C52-98FB-E10E876500B7",
+    "debug": true,
+    "aws": {
+      "accessKeyId": "***",
+      "secretAccessKey": "***",
+      "region": "***"
+    },
+    "email": "ihor.fito@techmagic.co"
+  },
+  "local": {
+    "database": "mongodb://localhost:27017/node-testing",
+    "seed": true,
+    "token": "7C91A11D-D48D-4C52-98FB-E10E876501B7",
+    "debug": true,
+    "aws": {
+      "accessKeyId": "***",
+      "secretAccessKey": "***",
+      "region": "***"
+    },
+    "email": "ihor.fito@techmagic.co"
+  }
+}
