@@ -28,6 +28,13 @@ user.path('password').set((value) => {
   return passportUtil.encryptPassword(value)
 })
 
+user.set('toJSON', {
+  transform: (doc, ret, options) => {
+    delete ret.password
+    return ret
+  }
+})
+
 user.path('email').validate((value) => {
   const emailRegex = validate.email
   return emailRegex.test(value)
