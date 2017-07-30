@@ -4,12 +4,14 @@ const express = require('express')
 const http = require('http')
 const env = process.env.NODE_ENV || 'local'
 const _config = require('./config/_config.json')[env]
+const util = require('./utils')
 
 const app = express()
 // Bootstrap application settings
 app.set('env', env)
 
 require('./config/express')(app)
+global.util = util
 
 // Routing
 app.use('/v1', require('./api/v1/index'))

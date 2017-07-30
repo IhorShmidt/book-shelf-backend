@@ -1,24 +1,25 @@
 'use strict'
 
-const express = require('express')
-const router = express.Router()
 const daoAuth = require('./auth.dao')
-const dtoUser = require('../users/users.dto')
-const errorHelper = require('../../../utils/errorHelper')
-const passportUtil = require('../../../utils/passport')
 
-router.post('/', (req, res, next) => {
+module.exports.signin = (req, res, next) => {
   const email = req.body.email
   const password = req.body.password
-  daoAuth.findOneByEmail(email)
-    .then((user) => {
-      if (!user) throw errorHelper.badRequest()
-      if (user.password !== passportUtil.encryptPassword(password)) throw errorHelper.badRequest()
-      user.accessToken = passportUtil.createAuthToken(user)
-      res.json(dtoUser.public(user))
-    })
-    .catch((err) => {
-      return next(err)
-    })
-})
-module.exports = router
+
+  if (!email || !password) { throw util.errorHelper.badRequest() }
+
+  daoAuth
+    .signin(email, password)
+    .then((result) => res.status(200).json(result))
+    .catch((err) => next(err))
+}
+
+module.exports.signup = (req, res, next) => {
+  const data = req.body
+  if (!data.email || !data.password) { throw util.errorHelper.badRequest() }
+
+  daoAuth
+    .signup(data)
+    .then((result) => res.status(200).json(result))
+    .catch((error) => next(error))
+}
