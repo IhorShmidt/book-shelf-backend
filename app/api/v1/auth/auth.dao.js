@@ -29,12 +29,9 @@ module.exports.signin = (email, password) => {
 }
 
 module.exports.signup = (data) => {
-  return Promise.resolve()
-    .then(() => UserModel.findOne({email: data.email.toLowerCase()}))
+  return UserModel.findOne({email: data.email.toLowerCase()})
     .then((user) => {
-      if (user) {
-        throw util.errorHelper.badRequest()
-      }
+      if (user) { throw util.errorHelper.badRequest('user.err.email_exists') }
       const userObject = _.pick(data, ['firstName', 'lastName', 'avatar', 'email', 'password', 'phone', 'skype'])
       const newUser = new UserModel(userObject)
       return newUser.save()
