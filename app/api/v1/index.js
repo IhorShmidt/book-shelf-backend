@@ -10,6 +10,8 @@ router.use('/groups', require('./groups/groups.controller'))
 router.post('/auth', authController.signin)
 router.put('/auth', authController.signup)
 
+router.use('/book', require('./books/books.controller'))
+
 router.get('/auth', passportMiddleware.checkAuthToken, (req, res, next) => res.status(200).send('Ok'))
 
 module.exports = router

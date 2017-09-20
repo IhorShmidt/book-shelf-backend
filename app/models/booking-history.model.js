@@ -4,8 +4,8 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const BookingHistorySchema = new Schema({
-  dateFrom: {type: Schema.Types.Date, required: true},
-  dateTo: {type: Schema.Types.Date, required: true},
+  dateFrom: {type: Schema.Types.Date, required: true, default: new Date()},
+  dateTo: {type: Schema.Types.Date},
   user: {type: Schema.Types.ObjectId, ref: 'user', required: true},
   book: {type: Schema.Types.Object, ref: 'Book'}
 }, {

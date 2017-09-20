@@ -1,6 +1,6 @@
 'use strict'
 
-const mongoose = require('mognoose')
+const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 const bookState = ['active', 'deleted']

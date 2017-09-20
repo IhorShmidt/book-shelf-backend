@@ -16,9 +16,12 @@ const user = new Schema({
   skype: {type: String},
   avatar: {type: String},
   password: {type: String, default: ''},
-  recentlyViewedBooks: [
+  recentlyViewedBooks: {
+    type: [
     {book: {type: Schema.Types.ObjectId, ref: 'Books'}, lastViewed: {type: Date}}
-  ]
+    ],
+    select: false
+  }
 }, {
   collection: 'users',
   _id: true
