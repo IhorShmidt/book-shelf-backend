@@ -12,6 +12,7 @@ app.set('env', env)
 
 require('./config/express')(app)
 global.util = util
+global.Promise = require('bluebird')
 
 // Routing
 app.use('/v1', require('./api/v1/index'))
