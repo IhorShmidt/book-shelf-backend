@@ -3,6 +3,8 @@
 const bookModel = require('../../../models/book.model')
 const bookHistoryModel = require('../../../models/booking-history.model')
 const userDao = require('../users/users.dao')
+const ObjectId = require('mongoose').Types.ObjectId
+const errorHelper = require('../../../utils/errorHelper')
 const _ = require('lodash')
 
 module.exports.create = function (data, user) {
@@ -25,6 +27,13 @@ module.exports.updateBook = function (bookId, data) {
     .catch((err) => {
       throw err
     })
+}
+
+module.exports.getBook = function (bookId) {
+  return _findBookById(bookId)
+  .catch((err) => {
+    throw err
+  })
 }
 
 module.exports.list = function (data) {
@@ -159,6 +168,9 @@ module.exports.increaseViewsCount = function (bookId, user) {
 }
 
 function _findBookById (id) {
+  if (!ObjectId.isValid(id)) {
+    throw errorHelper.badRequest()
+  }
   return bookModel.findById(id).then((book) => {
     if (!book) {
       throw util.errorHelper.badRequest()

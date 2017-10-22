@@ -13,7 +13,7 @@ router.post('/', (req, res, next) => {
 })
 
 router.post('/:book/grab', (req, res, next) => {
-  const bookId = req.params('book')
+  const bookId = req.params.book
   const user = req.user
   return daoBook.list(bookId, user).then((result) => {
     res.status(200).json(result)
@@ -22,9 +22,9 @@ router.post('/:book/grab', (req, res, next) => {
 })
 
 router.post('/:book/returnbook', (req, res, next) => {
-  const bookId = req.params('book')
+  const bookId = req.params.book
   const user = req.user
-  return daoBook.list(bookId, user).then((result) => {
+  return daoBook.returnbook(bookId, user).then((result) => {
     res.status(200).json(result)
   })
     .catch((err) => next(err))
@@ -38,8 +38,16 @@ router.get('/', (req, res, next) => {
     .catch((err) => next(err))
 })
 
+router.get('/:book', (req, res, next) => {
+  const bookId = req.params.book
+  return daoBook.getBook(bookId).then((result) => {
+    res.status(200).json(result)
+  })
+    .catch((err) => next(err))
+})
+
 router.put('/:book/dislike', (req, res, next) => {
-  const bookId = req.params('book')
+  const bookId = req.params.book
   return daoBook.dislike(bookId).then((result) => {
     res.status(200).json(result)
   })
@@ -47,7 +55,7 @@ router.put('/:book/dislike', (req, res, next) => {
 })
 
 router.put('/:book/views', (req, res, next) => {
-  const bookId = req.params('book')
+  const bookId = req.params.book
   const user = req.user
   return daoBook.increaseViewsCount(bookId, user).then((result) => {
     res.status(200).json(result)
@@ -56,7 +64,7 @@ router.put('/:book/views', (req, res, next) => {
 })
 
 router.put('/:book/subscribe', (req, res, next) => {
-  const bookId = req.params('book')
+  const bookId = req.params.book
   return daoBook.subscribe(bookId).then((result) => {
     res.status(200).json(result)
   })
@@ -64,7 +72,7 @@ router.put('/:book/subscribe', (req, res, next) => {
 })
 
 router.put('/:book/unsubscribe', (req, res, next) => {
-  const bookId = req.params('book')
+  const bookId = req.params.book
   return daoBook.unSubscribe(bookId).then((result) => {
     res.status(200).json(result)
   })
@@ -72,7 +80,7 @@ router.put('/:book/unsubscribe', (req, res, next) => {
 })
 
 router.delete('/:book', (req, res, next) => {
-  const bookId = req.params('book')
+  const bookId = req.params.book
   return daoBook.removeBook(bookId).then((result) => {
     res.status(200).json(result)
   })
@@ -80,7 +88,7 @@ router.delete('/:book', (req, res, next) => {
 })
 
 router.put('/:book/like', (req, res, next) => {
-  const bookId = req.params('book')
+  const bookId = req.params.book
   return daoBook.like(bookId).then((result) => {
     res.status(200).json(result)
   })
@@ -88,7 +96,7 @@ router.put('/:book/like', (req, res, next) => {
 })
 
 router.put('/:book', (req, res, next) => {
-  const bookId = req.params('book')
+  const bookId = req.params.book
   const data = req.body
   return daoBook.update(bookId, data).then((result) => {
     res.status(200).json(result)

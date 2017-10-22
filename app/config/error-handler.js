@@ -12,10 +12,14 @@ module.exports = (app) => {
   // error handler
   app.use((err, req, res, next) => {
     const error = {
-      code: err.code,
+      code: err.code || 500,
       error: err.error,
       message: err.message
     }
+    console.log('-----------------------------')
+    console.log(error.message ? error.message : '')
+    console.log(error.error ? error.error : '')
+    console.log('-----------------------------')
     res.status(error.code).json(error)
   })
 }

@@ -13,6 +13,11 @@ app.set('env', env)
 require('./config/express')(app)
 global.util = util
 global.Promise = require('bluebird')
+// log
+if (_config.debug) {
+  const morgan = require('morgan')
+  app.use(morgan(':method :url :status :response-time'))
+}
 
 // Routing
 app.use('/v1', require('./api/v1/index'))
@@ -23,12 +28,6 @@ connection.getMongoose()
 
 // error-handler settings
 require('./config/error-handler')(app)
-
-// log
-if (_config.debug) {
-  const morgan = require('morgan')
-  app.use(morgan(':method :url :status :response-time'))
-}
 
 // create server
 const port = process.env.PORT || 3000
