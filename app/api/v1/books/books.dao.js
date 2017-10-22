@@ -8,12 +8,13 @@ const errorHelper = require('../../../utils/errorHelper')
 const _ = require('lodash')
 
 module.exports.create = function (data, user) {
-  const addedBy = user.id
+  // const addedBy = user.id
+  const addedBy = new ObjectId()
   const book = _.assign(data, {
     addedBy
   })
 
-  return book.create(book)
+  return bookModel.create(book)
     .catch((err) => {
       throw err
     })

@@ -14,7 +14,7 @@ const BookSchema = new Schema({
   pages: {type: Number},
   year: {type: Date},
   addedBy: {type: Schema.Types.ObjectId, ref: 'User', required: true},
-  state: {type: String, required: true, enum: bookState, default: 'active'},
+  state: {type: String, enum: bookState, default: 'active'},
   bookedBy: {type: Schema.Types.ObjectId, ref: 'User'},
   busyBy: {type: Schema.Types.ObjectId, ref: 'User'},
   liked: {type: Number, default: 0},
