@@ -40,7 +40,8 @@ module.exports.getBook = function (bookId) {
 module.exports.list = function (data) {
   return bookModel.find({
     state: 'active'
-  }).limit(data.limit).offset(data.offset).sort(data.sort)
+  })
+  // .limit(data.limit).offset(data.offset).sort(data.sort)
 }
 
 module.exports.like = function (bookId, user) {
