@@ -2,8 +2,9 @@
 
 const router = require('express').Router()
 const daoBook = require('./books.dao')
+const booksMiddleware = require('./books.middleware')
 
-router.post('/', (req, res, next) => {
+router.post('/', booksMiddleware.validateCreate, (req, res, next) => {
   const data = req.body
   const user = req.user
   return daoBook.create(data, user).then((result) => {

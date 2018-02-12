@@ -42,8 +42,11 @@ module.exports.checkAuthToken = (req, res, next) => {
       res.locals.user = user
       return next()
     })
-    .catch((err) => {
-      return next(err)
+    .catch(() => {
+      res.status(403).json({
+        status: 'invalid_token',
+        error: 'Invalid token'
+      })
     })
 }
 

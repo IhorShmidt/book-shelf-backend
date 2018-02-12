@@ -18,7 +18,8 @@ const BookSchema = new Schema({
   bookedBy: {type: Schema.Types.ObjectId, ref: 'User'},
   busyBy: {type: Schema.Types.ObjectId, ref: 'User'},
   liked: {type: Number, default: 0},
-  disLiked: {type: Number, default: 0}
+  disLiked: {type: Number, default: 0},
+  imagePath: {type: String}
 },
   {
     versionKey: false,

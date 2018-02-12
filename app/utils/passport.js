@@ -11,7 +11,7 @@ module.exports.createAuthToken = (user, token) => {
   const tokenPayload = {
     userId: user._id
   }
-  const expiresIn = 24 * 60 * 60
+  const expiresIn = 24 * 60 * 60 * 30
   return jwt.sign(tokenPayload, tokenSecret, {expiresIn: expiresIn})
 }
 
