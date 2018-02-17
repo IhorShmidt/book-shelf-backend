@@ -10,9 +10,9 @@ const Schema = mongoose.Schema
  * This optional description belong to to the group user.
  */
 const user = new Schema({
-  firstName: {type: String, trim: true, default: ''},
-  lastName: {type: String, trim: true, default: ''},
-  email: {type: String, trim: true, unique: true, lowercase: true, required: true, default: ''},
+  firstName: {type: String, trim: true, default: '', minlength: 2, maxlength: 80},
+  lastName: {type: String, trim: true, default: '', minlength: 2, maxlength: 80},
+  email: {type: String, trim: true, unique: true, lowercase: true, required: true, default: '', maxlength: 80},
   skype: {type: String},
   avatar: {type: String},
   password: {type: String, default: ''},

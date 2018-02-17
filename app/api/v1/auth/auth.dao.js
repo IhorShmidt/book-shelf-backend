@@ -18,10 +18,10 @@ module.exports.signin = (email, password) => {
     .findOne({email: email.toLowerCase()})
     .then((user) => {
       if (!user) {
-        throw util.errorHelper.badRequest()
+        throw util.errorHelper.badRequest('Invalid username or password')
       }
       if (user.password !== util.passport.encryptPassword(password)) {
-        throw util.errorHelper.badRequest()
+        throw util.errorHelper.badRequest('Invalid username or password')
       }
       const token = util.passport.createAuthToken(user, null)
       return {token, user}
@@ -31,7 +31,7 @@ module.exports.signin = (email, password) => {
 module.exports.signup = (data) => {
   return UserModel.findOne({email: data.email.toLowerCase()})
     .then((user) => {
-      if (user) { throw util.errorHelper.badRequest('user.err.email_exists') }
+      if (user) { throw util.errorHelper.badRequest('Email already registered') }
       const userObject = _.pick(data, ['firstName', 'lastName', 'avatar', 'email', 'password', 'phone', 'skype'])
       const newUser = new UserModel(userObject)
       return newUser.save()
